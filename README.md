@@ -1,4 +1,4 @@
-# Discord Utility Bot
+# Signed Discord Utility Bot
 
 A Discord bot that helps you collect messages, images, and reactions from channels and re-post them in a structured way.
 
