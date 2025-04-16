@@ -5,11 +5,9 @@ import re
 import os
 from dotenv import load_dotenv
 
-# === Load Token from .env ===
 load_dotenv()
 TOKEN = os.getenv("DISCORD_BOT_TOKEN")
 
-# === Intents Setup ===
 intents = discord.Intents.default()
 intents.message_content = True
 intents.guilds = True
@@ -19,7 +17,6 @@ intents.members = True
 
 bot = commands.Bot(command_prefix="!", intents=intents, help_command=None)
 
-# === Regex Patterns ===
 image_url_pattern = re.compile(r"(https?://\S+\.(png|jpe?g|gif|webp|bmp))", re.IGNORECASE)
 link_pattern = re.compile(r"https?://discord(?:app)?\.com/channels/(\d+)/(\d+)/(\d+)")
 
@@ -27,35 +24,29 @@ link_pattern = re.compile(r"https?://discord(?:app)?\.com/channels/(\d+)/(\d+)/(
 async def on_ready():
     print(f"✅ Bot is online as {bot.user}")
 
-# === !help Command ===
-@bot.command()
-async def help(ctx):
+@bot.command(name="help")
+async def custom_help(ctx):
     help_text = """
 **Bot Commands Overview**
 
-➤ `!get_images <sourceChannelID> <targetChannelID> <limit> [mode]`  
-Copies image messages from one channel to another.  
-**Modes:** `links` (default), `images`, `reverse` (Google Reverse Image Search)
+➤ `!get_images <sourceChannelID> <limit> [mode]`  
+Copies image messages. Modes: `links`, `images`, `reverse`
 
-➤ `!get_messages <sourceChannelID> <targetChannelID> <limit>`  
-Copies up to `<limit>` messages per user from one channel to another.  
-Format: `@Username "Message"`
+➤ `!get_messages <sourceChannelID> <limit>`  
+Copies text messages per user
 
 ➤ `!get_reactions <messageLink>`  
-Shows who reacted to a message and with what emoji.
-
-> Tip: Make sure the bot has permission to read messages in both channels.
+Shows who reacted with what emoji
 """
     await ctx.send(help_text)
 
-# === !get_images Command ===
 @bot.command()
-async def get_images(ctx, source_channel_id: int, target_channel_id: int, limit: int = 2, mode: str = "links"):
+async def get_images(ctx, source_channel_id: int, limit: int = 2, mode: str = "links"):
     source_channel = bot.get_channel(source_channel_id)
-    target_channel = bot.get_channel(target_channel_id)
+    target_channel = ctx.channel
 
-    if not source_channel or not target_channel:
-        await ctx.send("❌ Invalid channel ID(s) or the bot doesn't have access.")
+    if not source_channel:
+        await ctx.send("❌ Invalid source channel ID.")
         return
 
     messages_per_user = defaultdict(list)
@@ -110,7 +101,7 @@ async def get_images(ctx, source_channel_id: int, target_channel_id: int, limit:
                     collected_links.append(f"🔍 **{author}**: [Reverse Search]({reverse_link})\n➡️ [Open Message]({link})")
                     sent_count += 1
 
-            else:  # default: links
+            else:
                 collected_links.append(f"🖼 **{author}**: {link}")
                 sent_count += 1
 
@@ -129,14 +120,13 @@ async def get_images(ctx, source_channel_id: int, target_channel_id: int, limit:
 
         await ctx.send(f"✅ {sent_count} messages processed ({mode.capitalize()}).")
 
-# === !get_messages Command ===
 @bot.command()
-async def get_messages(ctx, source_channel_id: int, target_channel_id: int, limit: int = 2):
+async def get_messages(ctx, source_channel_id: int, limit: int = 2):
     source_channel = bot.get_channel(source_channel_id)
-    target_channel = bot.get_channel(target_channel_id)
+    target_channel = ctx.channel
 
-    if not source_channel or not target_channel:
-        await ctx.send("❌ Invalid channel ID(s) or the bot doesn't have access.")
+    if not source_channel:
+        await ctx.send("❌ Invalid source channel ID.")
         return
 
     messages_per_user = defaultdict(list)
@@ -164,9 +154,8 @@ async def get_messages(ctx, source_channel_id: int, target_channel_id: int, limi
         if chunk:
             await target_channel.send(chunk)
 
-        await ctx.send(f"✅ {len(output_lines)} messages sent to <#{target_channel_id}>.")
+        await ctx.send(f"✅ {len(output_lines)} messages sent to <#{target_channel.id}>.")
 
-# === !get_reactions Command ===
 @bot.command()
 async def get_reactions(ctx, message_link: str):
     match = link_pattern.match(message_link)
@@ -207,6 +196,4 @@ async def get_reactions(ctx, message_link: str):
 
     await ctx.send(f"✅ {len(result_lines)} votes counted for [this message]({message_link}):\n" + "\n".join(result_lines))
 
-# === Run Bot ===
 bot.run(TOKEN)
-

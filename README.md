@@ -1,21 +1,21 @@
 # Signed Discord Utility Bot
 
-A Discord bot that helps you collect messages, images, and reactions from channels and re-post them in a structured way.
+A Discord bot that collects messages, images, and reactions from channels and reposts them in a clean format.
 
 ## 🔧 Features
 
-### ➤ `!get_images <sourceChannelID> <targetChannelID> <limit> [mode]`
-Copies image messages from one channel to another.
+### ➤ `!get_images <sourceChannelID> <limit> [mode]`
+Copies image messages from the given channel and sends the result to **the channel where the command is run**.
 
 **Modes:**
-- `links` – Sends links to original image messages  
-- `images` – Uploads actual images to the target channel  
-- `reverse` – Sends Google Reverse Image Search links for each image URL
+- `links` – Sends links to the original image messages  
+- `images` – Uploads the actual images to the channel  
+- `reverse` – Sends Google Reverse Image Search links for found image URLs
 
 ---
 
-### ➤ `!get_messages <sourceChannelID> <targetChannelID> <limit>`
-Copies up to `<limit>` messages per user from one channel and posts them to another.
+### ➤ `!get_messages <sourceChannelID> <limit>`
+Copies up to `<limit>` messages per user from the source channel and posts them to the current channel.
 
 **Format:**  
 `@Username "Message content"`
@@ -23,35 +23,29 @@ Copies up to `<limit>` messages per user from one channel and posts them to anot
 ---
 
 ### ➤ `!get_reactions <messageLink>`
-Shows a list of users who reacted to a message and what emoji they used.
+Displays who reacted to a message and what emoji they used.
 
 ---
-## Work in python virtual environment
-
-1. Create virtual environment
-
-```
-python3 -m venv .venv
-```
-2. Change context 
-
-```
-source .venv/bin/activate
-```
 
 ## ⚙️ Setup Instructions
 
-1. Install dependencies:
+1. Create and activate a virtual environment:
+```
+python -m venv venv
+source venv/bin/activate
+```
+
+2. Install dependencies:
 ```
 pip install -r requirements.txt
 ```
 
-2. Create a `.env` file in the root directory:
+3. Create a `.env` file in the root directory:
 ```
 DISCORD_BOT_TOKEN=your_discord_bot_token_here
 ```
 
-3. Run the bot:
+4. Run the bot:
 ```
 python bot.py
 ```
@@ -64,7 +58,7 @@ python bot.py
 DISCORD_BOT_TOKEN=your_discord_token_here
 ```
 
-> Never share your token publicly!
+> Never commit this file or share your token publicly!
 
 ---
 
