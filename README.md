@@ -77,9 +77,13 @@ uvicorn api:app --reload
 ### 2️⃣ Frontend (Dashboard UI)
 
 ```bash
-cd dashboard
+cd discord-bot-dashboard
 npm install
 npm run dev
+```
+OR
+```bash
+./start.sh
 ```
 
 Go to:  
