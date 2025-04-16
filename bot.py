@@ -17,7 +17,7 @@ intents.messages = True
 intents.reactions = True
 intents.members = True
 
-bot = commands.Bot(command_prefix="!", intents=intents)
+bot = commands.Bot(command_prefix="!", intents=intents, help_command=None)
 
 # === Regex Patterns ===
 image_url_pattern = re.compile(r"(https?://\S+\.(png|jpe?g|gif|webp|bmp))", re.IGNORECASE)
