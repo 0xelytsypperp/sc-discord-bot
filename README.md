@@ -1,29 +1,34 @@
-# Signed Discord Utility Bot
+# Discord Utility Bot
 
 A Discord bot that collects messages, images, and reactions from channels and reposts them in a clean format.
 
 ## 🔧 Features
 
 ### ➤ `!get_images <sourceChannelID> <limit> [mode]`
-Copies image messages from the given channel and sends the result to **the channel where the command is run**.
+Copies image messages from the given channel and sends the result to the channel where the command is run.
 
 **Modes:**
 - `links` – Sends links to the original image messages  
-- `images` – Uploads the actual images to the channel  
-- `reverse` – Sends Google Reverse Image Search links for found image URLs
+- `images` – Uploads the actual images  
+- `reverse` – Sends Google Reverse Image Search links for found images
+
+Also includes a summary table of results.
 
 ---
 
 ### ➤ `!get_messages <sourceChannelID> <limit>`
 Copies up to `<limit>` messages per user from the source channel and posts them to the current channel.
 
-**Format:**  
-`@Username "Message content"`
+Includes a markdown summary table:
+| # | Name | Message |
 
 ---
 
 ### ➤ `!get_reactions <messageLink>`
 Displays who reacted to a message and what emoji they used.
+
+Includes a markdown summary table:
+| # | Name | Emoji |
 
 ---
 
@@ -49,27 +54,3 @@ DISCORD_BOT_TOKEN=your_discord_bot_token_here
 ```
 python bot.py
 ```
-
----
-
-## 📁 .env Example
-
-```
-DISCORD_BOT_TOKEN=your_discord_token_here
-```
-
-> Never commit this file or share your token publicly!
-
----
-
-## ✅ Requirements
-
-- Python 3.8+
-- `discord.py`
-- `python-dotenv`
-
----
-
-## 🤝 License
-
-MIT – free to use and modify.
