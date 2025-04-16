@@ -26,6 +26,18 @@ Copies up to `<limit>` messages per user from one channel and posts them to anot
 Shows a list of users who reacted to a message and what emoji they used.
 
 ---
+## Work in python virtual environment
+
+1. Create virtual environment
+
+```
+python3 -m venv .venv
+```
+2. Change context 
+
+```
+source .venv/bin/activate
+```
 
 ## ⚙️ Setup Instructions
 
