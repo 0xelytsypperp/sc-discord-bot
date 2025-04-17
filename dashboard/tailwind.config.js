@@ -7,12 +7,12 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        skinDark: "#0b0c10",
+        skinDark: "#1f2833",
         skinPanel: "#1f2833",
-        skinAccent: "#66fcf1",
-        skinTextSubtle: "#c5c6c7",
-        skinButton: "#45a29e",
-        skinButtonHover: "#66fcf1"
+        skinAccent: "#5426FF",
+        skinTextSubtle: "#5426FF",
+        skinButton: "#CD40A7",
+        skinButtonHover: "#5426FF"
       }
     },
   },
