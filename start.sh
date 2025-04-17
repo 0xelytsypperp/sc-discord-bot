@@ -9,8 +9,8 @@ cd ..
 
 # Start frontend (React)
 echo "Starting React frontend..."
-cd discord-bot-dashboard
-npm run dev
+cd dashboard
+npm run dev --force
 
 # Optional: Kill backend when frontend exits (optional)
 kill $BACKEND_PID
