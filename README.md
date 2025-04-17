@@ -1,6 +1,6 @@
-# 🤖 SC Discord Bot – Fullstack Control Center
+# 💎 SC Discord Bot – Fullstack Dashboard
 
-A powerful fullstack application that allows you to manage and interact with your Discord server using a web dashboard, FastAPI backend, and a feature-rich Discord bot.
+A full-featured, Tailwind-powered Discord bot dashboard that allows you to control and manage image, message, and reaction exports — directly via a modern web interface.
 
 ---
 
@@ -8,34 +8,40 @@ A powerful fullstack application that allows you to manage and interact with you
 
 ### ✅ Discord Bot Commands
 
-| Command             | Description                                                                 |
-|--------------------|-----------------------------------------------------------------------------|
-| `!get_images`       | Fetches image messages from a channel. Modes: `links`, `images`, `reverse`. |
-| `!get_messages`     | Collects recent text messages per user from a channel.                      |
-| `!get_reactions`    | Shows who reacted with what emoji to a specific message.                    |
-| `!help`             | Lists available commands.                                                   |
+| Command             | Description                                                        |
+|--------------------|--------------------------------------------------------------------|
+| `!get_images`       | Extracts image messages with optional modes                        |
+| `!get_messages`     | Fetches per-user messages and exports to `.xlsx`                   |
+| `!get_reactions`    | Fetches user reactions from a specific message and exports to `.xlsx` |
+| `!help`             | Lists all available commands                                       |
 
-Each command posts results directly in the channel **and** generates an **Excel file (.xlsx)** with the structured output.
-
----
-
-### ✅ Web Dashboard (React)
-
-A modern, responsive dashboard UI where you can:
-
-- Select source and target channels via dropdown
-- Trigger bot commands
-- View output and download Excel logs
-- Browse recent command history
+Each command works via Discord or via the dashboard (through FastAPI backend).
 
 ---
 
-### ✅ FastAPI Backend
+## 💻 Dashboard
 
-API endpoints:
-- `POST /run` → Executes bot command
-- `GET /log` → Returns command history
-- `GET /channels` → Returns list of available channels for dropdowns
+Built with **React + Vite + TailwindCSS**, styled in a dark Skin.Club theme.
+
+### 🖼 UI Features
+
+- Source & target channel selection
+- Inputs for command parameters
+- Button controls
+- Live command output
+- Downloadable `.xlsx` files (auto-generated)
+
+---
+
+## 🔧 Backend
+
+**FastAPI** handles:
+
+- `POST /run` → Executes bot commands
+- `GET /channels` → Returns readable Discord text channels
+- `GET /log` → Shows command history (last 20)
+
+The bot runs inside the FastAPI app via `run_discord_bot()` to avoid event loop conflicts.
 
 ---
 
@@ -43,79 +49,81 @@ API endpoints:
 
 ```
 sc-discord-bot/
-├── bot/
-│   ├── bot.py
-│   ├── api.py
-│   ├── .env.example
-├── dashboard/
-│   └── src/App.jsx
-├── shared/
-│   └── command_history.json
-├── requirements.txt
-└── README.md
+├── bot/                   # Discord bot and API backend
+│   ├── bot.py             # All commands + utility functions
+│   ├── api.py             # FastAPI server
+│   └── .env.example       # Discord token placeholder
+├── dashboard/             # React frontend
+│   ├── src/               # App.jsx + index.css + main.jsx
+│   ├── tailwind.config.js # Custom theme
+│   └── index.html
+├── shared/                # Shared command_history.json
+├── README.md
+└── requirements.txt       # Python dependencies
 ```
 
 ---
 
-## ⚙️ Setup Instructions
+## ✅ Setup
 
-### 1️⃣ Backend (Bot + API)
+### 1. Clone & install
+
+```bash
+git clone https://github.com/your-repo/sc-discord-bot.git
+cd sc-discord-bot
+```
+
+### 2. Backend setup
 
 ```bash
 cd bot
 python -m venv venv
 source venv/bin/activate
-pip install -r requirements.txt
+pip install -r ../requirements.txt
 
 cp .env.example .env
-# Paste your Discord bot token into .env
+# Paste your bot token into .env
+
 uvicorn api:app --reload
 ```
 
----
-
-### 2️⃣ Frontend (Dashboard UI)
+### 3. Frontend setup
 
 ```bash
-cd discord-bot-dashboard
+cd ../dashboard
 npm install
 npm run dev
 ```
-OR
-```bash
-./start.sh
-```
 
-Go to:  
-📍 `http://localhost:5173`
+Open your browser: http://localhost:5173
 
 ---
 
-## 🧪 Example Usage
+## 📦 Export Format
 
-- `!get_images 1234567890 9876543210 3 reverse`
-- `!get_messages 1234567890 9876543210 5`
-- `!get_reactions <discord message link>`
+All exports are saved as `.xlsx` Excel files and sent directly into the selected target Discord channel.
 
 ---
 
-## ✅ Requirements
+## ⚙️ .env Configuration
 
-- Python 3.8+
-- Node.js + npm
-
-### Python packages
+`.env`:
 
 ```
-discord.py
-fastapi
-uvicorn
-python-dotenv
-openpyxl
+DISCORD_BOT_TOKEN=your-bot-token-here
 ```
+
+---
+
+## 📌 Notes
+
+- Tailwind custom theme defined in `tailwind.config.js`
+- All commands support both manual and API-triggered usage
+- Message & reaction limits are customizable
+- No slash commands yet – traditional `!` prefix based
 
 ---
 
 ## 🧠 License
 
-MIT – Free to use, fork and build on.
+MIT – free to use, hack, and build on.
