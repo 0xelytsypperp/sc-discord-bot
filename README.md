@@ -33,7 +33,7 @@ Make the script executable and run it:
 
 ```bash
 chmod +x start.sh
-./start.menu.fixed.sh
+./start.sh
 ```
 
 You will be prompted:
@@ -49,12 +49,12 @@ Choose 1 for live frontend development, or 2 for production mode.
 
 ### 🧪 Dev Mode
 
-- Vite runs at: `http://<your-ip>:5173`
+- Vite runs at: `http://<your-ip>:5173` <- thats all you need
 - Backend runs at: `http://<your-ip>:8000`
 
 ---
 
-### 🌐 Prod Mode
+### 🌐 Prod Mode 
 
 - Builds frontend
 - Serves UI at `http://<your-ip>:8000/dashboard`
@@ -97,8 +97,6 @@ This file is automatically ignored by Git.
 ```
 
 ---
-
-## ✨ Credits
 
 For improvements, contributions, or issues — feel free to open a pull request!
 
