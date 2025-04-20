@@ -32,7 +32,7 @@ Make sure the following tools are installed:
 Make the script executable and run it:
 
 ```bash
-chmod +x start.menu.fixed.sh
+chmod +x start.sh
 ./start.menu.fixed.sh
 ```
 
@@ -99,7 +99,5 @@ This file is automatically ignored by Git.
 ---
 
 ## ✨ Credits
-
-Built with ❤️ by SC Bot Team and optimized for speed & simplicity.
 
 For improvements, contributions, or issues — feel free to open a pull request!
