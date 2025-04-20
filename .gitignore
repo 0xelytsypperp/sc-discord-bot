@@ -4,6 +4,7 @@ dashboard/node_modules/
 # Environment files
 bot/.env
 dashboard/.env
+.env
 
 # Python virtual environment
 venv/
