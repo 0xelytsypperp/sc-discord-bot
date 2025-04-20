@@ -37,7 +37,7 @@ if [ ! -f ".env" ]; then
 fi
 
 echo "🚀 Starting backend API in background..."
-uvicorn api:app --host 0.0.0.0 --port 8000 --reload &
+uvicorn bot.api:app --host 0.0.0.0 --port 8000 --reload &
 BACKEND_PID=$!
 
 # --- Frontend Setup ---

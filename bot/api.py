@@ -6,7 +6,7 @@ from pathlib import Path
 import os
 from dotenv import load_dotenv
 import asyncio
-from bot import bot, run_discord_bot
+from .bot import bot, run_discord_bot
 
 load_dotenv(".env")
 
