@@ -39,7 +39,6 @@ fi
 echo "🚀 Starting backend API in background..."
 uvicorn api:app --host 0.0.0.0 --port 8000 --reload &
 BACKEND_PID=$!
-cd ..
 
 # --- Frontend Setup ---
 LOCAL_IP=$(ip route get 1 | awk '{print $7;exit}')
