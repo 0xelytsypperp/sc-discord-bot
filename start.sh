@@ -20,16 +20,15 @@ fi
 echo "▶️ Running in '$MODE' mode..."
 
 # --- Backend Setup ---
-cd bot
 if [ ! -d "venv" ]; then
   echo "📦 Creating virtual environment..."
   python3 -m venv venv
 fi
 
 echo "🐍 Activating virtual environment..."
-source venv/bin/activate
+source ./venv/bin/activate
 pip install --upgrade pip
-pip install -r ../requirements.txt
+pip install -r requirements.txt
 
 if [ ! -f ".env" ]; then
   read -p "🔑 Enter your Discord Bot Token: " TOKEN_INPUT
