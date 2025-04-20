@@ -7,13 +7,13 @@ It supports message/image extraction, reaction analysis, and outputs `.xlsx` fil
 
 ## ✅ Features
 
-- ⚡️ One-command startup: `start.devprod.sh`
-- 🔐 Interactive Discord Bot Token prompt
-- 🌐 Auto-detects local IP for API/Frontend communication
-- 🧪 Dev/Prod switch for Vite UI (prod mode is still in development)
-- 🧹 No manual `.env` or config edits needed
+- ⚡️ One-command startup with interactive mode
+- 🧠 Mode selector: Dev (`vite dev`) or Prod (build + FastAPI)
+- 🔐 Discord Bot Token setup via prompt if not set
+- 🌐 Local IP auto-detection for API communication
+- 🧪 Vite UI with hot reload
 - 📦 React + Tailwind + FastAPI
-- 📄 Excel output for commands (`get_messages`, `get_reactions`, etc.)
+- 📄 Excel output for `get_messages`, `get_reactions`
 
 ---
 
@@ -23,51 +23,60 @@ Make sure the following tools are installed:
 
 - `Python 3.10+`
 - `Node.js 18+`
-- `npm` (Node Package Manager)
+- `npm`
 
 ---
 
 ## 🚀 Getting Started
 
-Clone the repo, make the script executable, and run:
+Make the script executable and run it:
 
 ```bash
-chmod +x start.auto.devprod.sh
-./start.auto.devprod.sh
+chmod +x start.menu.fixed.sh
+./start.menu.fixed.sh
 ```
 
-> This runs the project in **production mode** (serves built UI via FastAPI)
+You will be prompted:
+
+```
+1) Dev mode (Vite live reload)
+2) Prod mode (Build + API via FastAPI)
+```
+
+Choose 1 for live frontend development, or 2 for production mode.
 
 ---
 
-### 🔁 Development Mode
+### 🧪 Dev Mode
 
-To start the frontend in **live development mode** (hot-reload, dev server):
+- Vite runs at: `http://<your-ip>:5173`
+- Backend runs at: `http://<your-ip>:8000`
 
-```bash
-./start.auto.devprod.sh dev
-```
+---
 
-- UI available at: `http://<your-ip>:5173`
-- Backend API: `http://<your-ip>:8000`
+### 🌐 Prod Mode
+
+- Builds frontend
+- Serves UI at `http://<your-ip>:8000/dashboard`
+- API available at: `http://<your-ip>:8000/api/...`
 
 ---
 
 ## 🔐 Discord Token Handling
 
-If the file `bot/.env` does not exist, the script will prompt you for your Discord bot token:
+If `bot/.env` is missing, you will be prompted:
 
 ```
 🔑 Enter your Discord Bot Token:
 ```
 
-It will be written into `bot/.env` as:
+The token will be saved in:
 
 ```env
-DISCORD_BOT_TOKEN=your-token-here
+bot/.env
 ```
 
-This file is automatically ignored by Git via `.gitignore`.
+This file is automatically ignored by Git.
 
 ---
 
@@ -75,23 +84,22 @@ This file is automatically ignored by Git via `.gitignore`.
 
 ```
 .
-├── bot/                 # FastAPI backend & Discord bot
-│   ├── api.py           # API server
-│   ├── .env             # Bot token stored here
-│   └── venv/            # Python virtual environment (auto-created)
-├── dashboard/           # Vite frontend (React + Tailwind)
-│   ├── .env             # VITE_API_BASE set dynamically
-│   └── src/App.jsx      # Frontend logic
-├── shared/              # Log/output files
-├── requirements.txt     # Python dependencies
-├── start.devprod.sh     # Start script (Dev/Prod/Setup)
+├── bot/                   # Backend: FastAPI + Discord bot
+│   ├── api.py             # FastAPI app
+│   └── .env               # Discord bot token
+├── dashboard/             # Frontend (Vite + React + Tailwind)
+│   ├── .env               # VITE_API_BASE set dynamically
+│   └── src/App.jsx        # React UI logic
+├── shared/                # Exported logs/data
+├── requirements.txt       # Python dependencies
+├── start.menu.fixed.sh    # Dev/Prod startup script
 └── README.md
 ```
 
 ---
 
-For questions or contributions, open an issue or pull request.
+## ✨ Credits
 
-## 🧠 License
+Built with ❤️ by SC Bot Team and optimized for speed & simplicity.
 
-MIT – free to use, hack, and build on.
+For improvements, contributions, or issues — feel free to open a pull request!
