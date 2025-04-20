@@ -101,3 +101,7 @@ This file is automatically ignored by Git.
 ## ✨ Credits
 
 For improvements, contributions, or issues — feel free to open a pull request!
+
+## 📝 License
+
+This project is licensed under the MIT License and can be freely used, modified, and distributed by anyone — for personal or commercial purposes. Attribution is not required.
