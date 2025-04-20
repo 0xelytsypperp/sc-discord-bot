@@ -92,7 +92,7 @@ This file is automatically ignored by Git.
 │   └── src/App.jsx        # React UI logic
 ├── shared/                # Exported logs/data
 ├── requirements.txt       # Python dependencies
-├── start.menu.fixed.sh    # Dev/Prod startup script
+├── start.sh    # Dev/Prod startup script
 └── README.md
 ```
 
