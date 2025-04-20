@@ -11,13 +11,15 @@ export default function App() {
     mode: "",
     messageLink: ""
   });
+  
+  const API_BASE = import.meta.env.VITE_API_BASE || "http://192.168.1.110:8000";
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
   const sendCommand = async (command, args = []) => {
-    const res = await fetch("http://localhost:8000/run", {
+    const res = await fetch(`${API_BASE}/run`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ command, args })
@@ -28,13 +30,13 @@ export default function App() {
   };
 
   const fetchLogs = async () => {
-    const res = await fetch("http://localhost:8000/log");
+    const res = await fetch(`${API_BASE}/log`);
     const data = await res.json();
     setLogs(data.history || []);
   };
 
   const fetchChannels = async () => {
-    const res = await fetch("http://localhost:8000/channels");
+    const res = await fetch(`${API_BASE}/channels`);
     const data = await res.json();
     setChannels(data);
   };

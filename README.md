@@ -1,128 +1,96 @@
-# 💎 SC Discord Bot – Fullstack Dashboard
+# 🧠 SC Discord Bot Dashboard
 
-A full-featured, Tailwind-powered Discord bot dashboard that allows you to control and manage image, message, and reaction exports — directly via a modern web interface.
-
----
-
-## 🚀 Features
-
-### ✅ Discord Bot Commands
-
-| Command             | Description                                                        |
-|--------------------|--------------------------------------------------------------------|
-| `!get_images`       | Extracts image messages with optional modes                        |
-| `!get_messages`     | Fetches per-user messages and exports to `.xlsx`                   |
-| `!get_reactions`    | Fetches user reactions from a specific message and exports to `.xlsx` |
-| `!help`             | Lists all available commands                                       |
-
-Each command works via Discord or via the dashboard (through FastAPI backend).
+This project provides a fully automated, modern dashboard for managing a Discord bot with FastAPI and Vite (React + Tailwind).  
+It supports message/image extraction, reaction analysis, and outputs `.xlsx` files.
 
 ---
 
-## 💻 Dashboard
+## ✅ Features
 
-Built with **React + Vite + TailwindCSS**, styled in a dark Skin.Club theme.
-
-### 🖼 UI Features
-
-- Source & target channel selection
-- Inputs for command parameters
-- Button controls
-- Live command output
-- Downloadable `.xlsx` files (auto-generated)
+- ⚡️ One-command startup: `start.devprod.sh`
+- 🔐 Interactive Discord Bot Token prompt
+- 🌐 Auto-detects local IP for API/Frontend communication
+- 🧪 Dev/Prod switch for Vite UI (prod mode is still in development)
+- 🧹 No manual `.env` or config edits needed
+- 📦 React + Tailwind + FastAPI
+- 📄 Excel output for commands (`get_messages`, `get_reactions`, etc.)
 
 ---
 
-## 🔧 Backend
+## 🔧 Prerequisites
 
-**FastAPI** handles:
+Make sure the following tools are installed:
 
-- `POST /run` → Executes bot commands
-- `GET /channels` → Returns readable Discord text channels
-- `GET /log` → Shows command history (last 20)
-
-The bot runs inside the FastAPI app via `run_discord_bot()` to avoid event loop conflicts.
+- `Python 3.10+`
+- `Node.js 18+`
+- `npm` (Node Package Manager)
 
 ---
 
-## 📁 Project Structure
+## 🚀 Getting Started
 
-```
-sc-discord-bot/
-├── bot/                   # Discord bot and API backend
-│   ├── bot.py             # All commands + utility functions
-│   ├── api.py             # FastAPI server
-│   └── .env.example       # Discord token placeholder
-├── dashboard/             # React frontend
-│   ├── src/               # App.jsx + index.css + main.jsx
-│   ├── tailwind.config.js # Custom theme
-│   └── index.html
-├── shared/                # Shared command_history.json
-├── README.md
-└── requirements.txt       # Python dependencies
-```
-
----
-
-## ✅ Setup
-
-### 1. Clone & install
+Clone the repo, make the script executable, and run:
 
 ```bash
-git clone https://github.com/your-repo/sc-discord-bot.git
-cd sc-discord-bot
+chmod +x start.auto.devprod.sh
+./start.auto.devprod.sh
 ```
 
-### 2. Backend setup
+> This runs the project in **production mode** (serves built UI via FastAPI)
+
+---
+
+### 🔁 Development Mode
+
+To start the frontend in **live development mode** (hot-reload, dev server):
 
 ```bash
-cd bot
-python -m venv venv
-source venv/bin/activate
-pip install -r ../requirements.txt
-
-cp .env.example .env
-# Paste your bot token into .env
-
-uvicorn api:app --reload
+./start.auto.devprod.sh dev
 ```
 
-### 3. Frontend setup
-
-```bash
-cd ../dashboard
-npm install
-npm run dev
-```
-
-Open your browser: http://localhost:5173
+- UI available at: `http://<your-ip>:5173`
+- Backend API: `http://<your-ip>:8000`
 
 ---
 
-## 📦 Export Format
+## 🔐 Discord Token Handling
 
-All exports are saved as `.xlsx` Excel files and sent directly into the selected target Discord channel.
-
----
-
-## ⚙️ .env Configuration
-
-`.env`:
+If the file `bot/.env` does not exist, the script will prompt you for your Discord bot token:
 
 ```
-DISCORD_BOT_TOKEN=your-bot-token-here
+🔑 Enter your Discord Bot Token:
+```
+
+It will be written into `bot/.env` as:
+
+```env
+DISCORD_BOT_TOKEN=your-token-here
+```
+
+This file is automatically ignored by Git via `.gitignore`.
+
+---
+
+## 📁 Folder Structure
+
+```
+.
+├── bot/                 # FastAPI backend & Discord bot
+│   ├── api.py           # API server
+│   ├── .env             # Bot token stored here
+│   └── venv/            # Python virtual environment (auto-created)
+├── dashboard/           # Vite frontend (React + Tailwind)
+│   ├── .env             # VITE_API_BASE set dynamically
+│   └── src/App.jsx      # Frontend logic
+├── shared/              # Log/output files
+├── requirements.txt     # Python dependencies
+├── start.devprod.sh     # Start script (Dev/Prod/Setup)
+└── README.md
 ```
 
 ---
 
-## 📌 Notes
-
-- Tailwind custom theme defined in `tailwind.config.js`
-- All commands support both manual and API-triggered usage
-- Message & reaction limits are customizable
-- No slash commands yet – traditional `!` prefix based
-
----
+For questions or contributions, open an issue or pull request.
 
 ## 🧠 License
 
