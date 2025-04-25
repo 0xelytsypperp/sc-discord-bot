@@ -5,6 +5,8 @@ It supports message/image extraction, reaction analysis, and outputs `.xlsx` fil
 
 ---
 
+![Image](https://github.com/user-attachments/assets/501d1594-5aee-4a0a-82f1-60401f83be5a)
+
 ## ✅ Features
 
 - ⚡️ One-command startup with interactive mode
